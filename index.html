@@ -93,7 +93,19 @@
     overflow: hidden;
   }
 
-  .hero-glow {
+  .die-bg {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 560px;
+    height: 560px;
+    opacity: 0.18;
+    pointer-events: none;
+    animation: fadeUp 1s 1s both;
+  }
+
+  .die-bg svg { width: 100%; height: 100%; }
     position: absolute;
     width: 600px; height: 600px;
     border-radius: 50%;
@@ -291,12 +303,7 @@
     gap: 32px;
     padding: 40px 0;
     border-bottom: 1px solid var(--border);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s;
   }
-
-  .timeline-item.visible { opacity: 1; transform: translateY(0); }
 
   .timeline-meta {
     padding-top: 4px;
@@ -366,11 +373,7 @@
     background: var(--bg2);
     padding: 36px;
     transition: background 0.25s;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s, background 0.25s;
   }
-  .project-card.visible { opacity: 1; transform: translateY(0); }
   .project-card:hover { background: var(--bg3); }
 
   .project-index {
@@ -498,6 +501,235 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-glow"></div>
+
+  <!-- ASIC Die Illustration -->
+  <div class="die-bg">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="micro" width="6" height="6" patternUnits="userSpaceOnUse">
+          <rect width="6" height="6" fill="none"/>
+          <rect x="0" y="0" width="2" height="2" fill="#00e5ff" opacity="0.3"/>
+        </pattern>
+      </defs>
+
+      <!-- Die boundary -->
+      <rect x="4" y="4" width="492" height="492" fill="none" stroke="#00e5ff" stroke-width="2"/>
+      <!-- Power ring -->
+      <rect x="18" y="18" width="464" height="464" fill="none" stroke="#00e5ff" stroke-width="0.6" stroke-dasharray="4 3"/>
+      <!-- Inner boundary -->
+      <rect x="52" y="52" width="396" height="396" fill="none" stroke="#00e5ff" stroke-width="0.5" opacity="0.5"/>
+
+      <!-- I/O Pads — top edge -->
+      <g fill="#00e5ff" opacity="0.9">
+        <rect x="60"  y="6"  width="8" height="8"/>
+        <rect x="80"  y="6"  width="8" height="8"/>
+        <rect x="100" y="6"  width="8" height="8"/>
+        <rect x="120" y="6"  width="8" height="8"/>
+        <rect x="140" y="6"  width="8" height="8"/>
+        <rect x="164" y="6"  width="8" height="8"/>
+        <rect x="184" y="6"  width="8" height="8"/>
+        <rect x="210" y="6"  width="8" height="8"/>
+        <rect x="234" y="6"  width="8" height="8"/>
+        <rect x="258" y="6"  width="8" height="8"/>
+        <rect x="282" y="6"  width="8" height="8"/>
+        <rect x="306" y="6"  width="8" height="8"/>
+        <rect x="330" y="6"  width="8" height="8"/>
+        <rect x="354" y="6"  width="8" height="8"/>
+        <rect x="378" y="6"  width="8" height="8"/>
+        <rect x="402" y="6"  width="8" height="8"/>
+        <rect x="426" y="6"  width="8" height="8"/>
+      </g>
+      <!-- I/O Pads — bottom edge -->
+      <g fill="#00e5ff" opacity="0.9">
+        <rect x="60"  y="486" width="8" height="8"/>
+        <rect x="80"  y="486" width="8" height="8"/>
+        <rect x="104" y="486" width="8" height="8"/>
+        <rect x="130" y="486" width="8" height="8"/>
+        <rect x="156" y="486" width="8" height="8"/>
+        <rect x="182" y="486" width="8" height="8"/>
+        <rect x="208" y="486" width="8" height="8"/>
+        <rect x="234" y="486" width="8" height="8"/>
+        <rect x="260" y="486" width="8" height="8"/>
+        <rect x="286" y="486" width="8" height="8"/>
+        <rect x="312" y="486" width="8" height="8"/>
+        <rect x="338" y="486" width="8" height="8"/>
+        <rect x="364" y="486" width="8" height="8"/>
+        <rect x="390" y="486" width="8" height="8"/>
+        <rect x="416" y="486" width="8" height="8"/>
+        <rect x="432" y="486" width="8" height="8"/>
+      </g>
+      <!-- I/O Pads — left edge -->
+      <g fill="#00e5ff" opacity="0.9">
+        <rect x="6" y="60"  width="8" height="8"/>
+        <rect x="6" y="84"  width="8" height="8"/>
+        <rect x="6" y="108" width="8" height="8"/>
+        <rect x="6" y="132" width="8" height="8"/>
+        <rect x="6" y="160" width="8" height="8"/>
+        <rect x="6" y="188" width="8" height="8"/>
+        <rect x="6" y="216" width="8" height="8"/>
+        <rect x="6" y="244" width="8" height="8"/>
+        <rect x="6" y="272" width="8" height="8"/>
+        <rect x="6" y="300" width="8" height="8"/>
+        <rect x="6" y="328" width="8" height="8"/>
+        <rect x="6" y="356" width="8" height="8"/>
+        <rect x="6" y="384" width="8" height="8"/>
+        <rect x="6" y="412" width="8" height="8"/>
+        <rect x="6" y="432" width="8" height="8"/>
+      </g>
+      <!-- I/O Pads — right edge -->
+      <g fill="#ff6b35" opacity="0.9">
+        <rect x="486" y="60"  width="8" height="8"/>
+        <rect x="486" y="84"  width="8" height="8"/>
+        <rect x="486" y="108" width="8" height="8"/>
+        <rect x="486" y="136" width="8" height="8"/>
+        <rect x="486" y="164" width="8" height="8"/>
+        <rect x="486" y="192" width="8" height="8"/>
+        <rect x="486" y="220" width="8" height="8"/>
+        <rect x="486" y="248" width="8" height="8"/>
+        <rect x="486" y="276" width="8" height="8"/>
+        <rect x="486" y="304" width="8" height="8"/>
+        <rect x="486" y="332" width="8" height="8"/>
+        <rect x="486" y="360" width="8" height="8"/>
+        <rect x="486" y="388" width="8" height="8"/>
+        <rect x="486" y="416" width="8" height="8"/>
+        <rect x="486" y="432" width="8" height="8"/>
+      </g>
+
+      <!-- ── FUNCTIONAL BLOCKS ── -->
+
+      <!-- PCIe / Interconnect fabric — top strip -->
+      <rect x="56" y="56" width="388" height="38" fill="#00e5ff" opacity="0.08" stroke="#00e5ff" stroke-width="0.8"/>
+      <!-- PCIe lanes inside -->
+      <g stroke="#00e5ff" stroke-width="0.5" opacity="0.6">
+        <line x1="80"  y1="60" x2="80"  y2="90"/>
+        <line x1="104" y1="60" x2="104" y2="90"/>
+        <line x1="128" y1="60" x2="128" y2="90"/>
+        <line x1="152" y1="60" x2="152" y2="90"/>
+        <line x1="200" y1="60" x2="200" y2="90"/>
+        <line x1="224" y1="60" x2="224" y2="90"/>
+        <line x1="248" y1="60" x2="248" y2="90"/>
+        <line x1="296" y1="60" x2="296" y2="90"/>
+        <line x1="320" y1="60" x2="320" y2="90"/>
+        <line x1="368" y1="60" x2="368" y2="90"/>
+        <line x1="392" y1="60" x2="392" y2="90"/>
+        <line x1="416" y1="60" x2="416" y2="90"/>
+      </g>
+
+      <!-- L3 Cache — left column -->
+      <rect x="56"  y="100" width="56" height="90"  fill="#00e5ff" opacity="0.1" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="56"  y="196" width="56" height="90"  fill="#00e5ff" opacity="0.1" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="56"  y="292" width="56" height="90"  fill="#00e5ff" opacity="0.1" stroke="#00e5ff" stroke-width="0.8"/>
+      <!-- cache stripes -->
+      <g stroke="#00e5ff" stroke-width="0.4" opacity="0.5">
+        <line x1="60" y1="116" x2="108" y2="116"/>
+        <line x1="60" y1="130" x2="108" y2="130"/>
+        <line x1="60" y1="144" x2="108" y2="144"/>
+        <line x1="60" y1="158" x2="108" y2="158"/>
+        <line x1="60" y1="172" x2="108" y2="172"/>
+        <line x1="60" y1="210" x2="108" y2="210"/>
+        <line x1="60" y1="224" x2="108" y2="224"/>
+        <line x1="60" y1="238" x2="108" y2="238"/>
+        <line x1="60" y1="252" x2="108" y2="252"/>
+        <line x1="60" y1="266" x2="108" y2="266"/>
+        <line x1="60" y1="308" x2="108" y2="308"/>
+        <line x1="60" y1="322" x2="108" y2="322"/>
+        <line x1="60" y1="336" x2="108" y2="336"/>
+        <line x1="60" y1="350" x2="108" y2="350"/>
+        <line x1="60" y1="364" x2="108" y2="364"/>
+      </g>
+
+      <!-- ── GPU COMPUTE CORE GRID (4x5) ── -->
+      <!-- Row 1 -->
+      <rect x="120" y="100" width="66" height="55" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="192" y="100" width="66" height="55" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="264" y="100" width="66" height="55" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="336" y="100" width="66" height="55" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+      <!-- Row 2 -->
+      <rect x="120" y="161" width="66" height="55" fill="#00e5ff" opacity="0.09" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="192" y="161" width="66" height="55" fill="#00e5ff" opacity="0.12" stroke="#00e5ff" stroke-width="1"/>
+      <rect x="264" y="161" width="66" height="55" fill="#00e5ff" opacity="0.12" stroke="#00e5ff" stroke-width="1"/>
+      <rect x="336" y="161" width="66" height="55" fill="#00e5ff" opacity="0.09" stroke="#00e5ff" stroke-width="0.8"/>
+      <!-- Row 3 -->
+      <rect x="120" y="222" width="66" height="55" fill="#00e5ff" opacity="0.09" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="192" y="222" width="66" height="55" fill="#00e5ff" opacity="0.12" stroke="#00e5ff" stroke-width="1"/>
+      <rect x="264" y="222" width="66" height="55" fill="#00e5ff" opacity="0.12" stroke="#00e5ff" stroke-width="1"/>
+      <rect x="336" y="222" width="66" height="55" fill="#00e5ff" opacity="0.09" stroke="#00e5ff" stroke-width="0.8"/>
+      <!-- Row 4 -->
+      <rect x="120" y="283" width="66" height="55" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="192" y="283" width="66" height="55" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="264" y="283" width="66" height="55" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="336" y="283" width="66" height="55" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+
+      <!-- Sub-grid dots inside cores (PE array hint) -->
+      <g fill="#00e5ff" opacity="0.5">
+        <!-- row1 col1 -->
+        <rect x="130" y="110" width="4" height="4"/><rect x="142" y="110" width="4" height="4"/><rect x="154" y="110" width="4" height="4"/>
+        <rect x="130" y="122" width="4" height="4"/><rect x="142" y="122" width="4" height="4"/><rect x="154" y="122" width="4" height="4"/>
+        <rect x="130" y="134" width="4" height="4"/><rect x="142" y="134" width="4" height="4"/><rect x="154" y="134" width="4" height="4"/>
+        <!-- row1 col2 -->
+        <rect x="202" y="110" width="4" height="4"/><rect x="214" y="110" width="4" height="4"/><rect x="226" y="110" width="4" height="4"/>
+        <rect x="202" y="122" width="4" height="4"/><rect x="214" y="122" width="4" height="4"/><rect x="226" y="122" width="4" height="4"/>
+        <rect x="202" y="134" width="4" height="4"/><rect x="214" y="134" width="4" height="4"/><rect x="226" y="134" width="4" height="4"/>
+        <!-- row2 col2 (highlighted) -->
+        <rect x="202" y="171" width="4" height="4"/><rect x="214" y="171" width="4" height="4"/><rect x="226" y="171" width="4" height="4"/>
+        <rect x="202" y="183" width="4" height="4"/><rect x="214" y="183" width="4" height="4"/><rect x="226" y="183" width="4" height="4"/>
+        <rect x="202" y="195" width="4" height="4"/><rect x="214" y="195" width="4" height="4"/><rect x="226" y="195" width="4" height="4"/>
+        <!-- row2 col3 -->
+        <rect x="274" y="171" width="4" height="4"/><rect x="286" y="171" width="4" height="4"/><rect x="298" y="171" width="4" height="4"/>
+        <rect x="274" y="183" width="4" height="4"/><rect x="286" y="183" width="4" height="4"/><rect x="298" y="183" width="4" height="4"/>
+        <rect x="274" y="195" width="4" height="4"/><rect x="286" y="195" width="4" height="4"/><rect x="298" y="195" width="4" height="4"/>
+      </g>
+
+      <!-- Memory Controller — right column -->
+      <rect x="408" y="100" width="36" height="282" fill="#ff6b35" opacity="0.08" stroke="#ff6b35" stroke-width="0.8"/>
+      <!-- mem ctrl stripes -->
+      <g stroke="#ff6b35" stroke-width="0.5" opacity="0.6">
+        <line x1="412" y1="120" x2="440" y2="120"/>
+        <line x1="412" y1="136" x2="440" y2="136"/>
+        <line x1="412" y1="152" x2="440" y2="152"/>
+        <line x1="412" y1="168" x2="440" y2="168"/>
+        <line x1="412" y1="190" x2="440" y2="190"/>
+        <line x1="412" y1="206" x2="440" y2="206"/>
+        <line x1="412" y1="222" x2="440" y2="222"/>
+        <line x1="412" y1="238" x2="440" y2="238"/>
+        <line x1="412" y1="260" x2="440" y2="260"/>
+        <line x1="412" y1="276" x2="440" y2="276"/>
+        <line x1="412" y1="292" x2="440" y2="292"/>
+        <line x1="412" y1="308" x2="440" y2="308"/>
+        <line x1="412" y1="330" x2="440" y2="330"/>
+        <line x1="412" y1="346" x2="440" y2="346"/>
+        <line x1="412" y1="362" x2="440" y2="362"/>
+      </g>
+
+      <!-- Display engine / misc — bottom strip -->
+      <rect x="56" y="388" width="162" height="56" fill="#ff6b35" opacity="0.07" stroke="#ff6b35" stroke-width="0.8"/>
+      <rect x="224" y="388" width="100" height="56" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+      <rect x="330" y="388" width="114" height="56" fill="#00e5ff" opacity="0.07" stroke="#00e5ff" stroke-width="0.8"/>
+
+      <!-- Horizontal interconnect buses -->
+      <g stroke="#00e5ff" stroke-width="0.6" opacity="0.4">
+        <line x1="56" y1="158" x2="444" y2="158"/>
+        <line x1="56" y1="248" x2="444" y2="248"/>
+        <line x1="56" y1="338" x2="444" y2="338"/>
+      </g>
+      <!-- Vertical interconnect buses -->
+      <g stroke="#00e5ff" stroke-width="0.6" opacity="0.4">
+        <line x1="118" y1="56" x2="118" y2="444"/>
+        <line x1="190" y1="56" x2="190" y2="444"/>
+        <line x1="262" y1="56" x2="262" y2="444"/>
+        <line x1="334" y1="56" x2="334" y2="444"/>
+        <line x1="406" y1="56" x2="406" y2="444"/>
+      </g>
+
+      <!-- Corner marks -->
+      <g stroke="#00e5ff" stroke-width="1.5" fill="none" opacity="0.8">
+        <polyline points="4,20 4,4 20,4"/>
+        <polyline points="480,4 496,4 496,20"/>
+        <polyline points="4,480 4,496 20,496"/>
+        <polyline points="480,496 496,496 496,480"/>
+      </g>
+    </svg>
+  </div>
   <p class="hero-tag">// ASIC Design · RTL · CPU/GPU Microarchitecture · SoC</p>
   <h1>Vidhyanandhan<br><span class="accent">Sathishkumar</span></h1>
   <p class="hero-sub">
@@ -509,13 +741,17 @@
     real-time motion control for vision and robotics systems.
   </p>
   <div class="hero-cta">
-    <a class="btn btn-primary" href="mailto:vidhyanandhan2001@outlook.com">Get in Touch</a>
+    <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#b7c1ded3dfced6d9d6d9d3dfd6d985878786f7d8c2c3dbd8d8dc99d4d8da">Get in Touch</a>
     <a class="btn btn-outline" href="#projects">View Projects</a>
   </div>
   <div class="hero-stats">
     <div>
       <div class="stat-num">3+</div>
       <div class="stat-label">Years Industry</div>
+    </div>
+    <div>
+      <div class="stat-num">4</div>
+      <div class="stat-label">Full ASIC Projects</div>
     </div>
     <div>
       <div class="stat-num">2</div>
@@ -550,16 +786,35 @@
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-card-title">EDA Tools</div>
+        <div class="skill-card-title">Synopsys Tools</div>
         <div class="skill-tags">
-          <span class="tag">Synopsys DC</span>
-          <span class="tag">Cadence Innovus</span>
-          <span class="tag">PrimeTime</span>
-          <span class="tag">Cadence Virtuoso</span>
-          <span class="tag">Questasim</span>
+          <span class="tag">Design Compiler</span>
           <span class="tag">Design Vision</span>
+          <span class="tag">IC Compiler II</span>
+          <span class="tag">PrimeTime</span>
+          <span class="tag">VCS</span>
+          <span class="tag">HSPICE</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Cadence Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Innovus</span>
+          <span class="tag">Virtuoso</span>
+          <span class="tag">Genus</span>
+          <span class="tag">Tempus</span>
+          <span class="tag">Voltus</span>
+          <span class="tag">Xcelium</span>
+          <span class="tag">Questasim</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">FPGA & Open-Source EDA</div>
+        <div class="skill-tags">
           <span class="tag">OpenLane</span>
           <span class="tag">Yosys</span>
+          <span class="tag">Vivado</span>
+          <span class="tag">Quartus</span>
         </div>
       </div>
       <div class="skill-card">
@@ -573,6 +828,17 @@
           <span class="tag">Ramulator</span>
           <span class="tag">Vivado</span>
           <span class="tag">Quartus</span>
+          <span class="tag">NI LabVIEW</span>
+          <span class="tag">Matlab</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">PCB & Mechanical</div>
+        <div class="skill-tags">
+          <span class="tag">Altium Designer</span>
+          <span class="tag">OrCAD</span>
+          <span class="tag">Autodesk Fusion</span>
+          <span class="tag">Autodesk Inventor</span>
         </div>
       </div>
       <div class="skill-card">
@@ -753,8 +1019,8 @@
   <div class="section-inner">
     <p class="section-label">Contact</p>
     <h2>Let's Build<br>Something Real</h2>
-    <a class="contact-email" href="mailto:vidhyanandhan2001@outlook.com">
-      vidhyanandhan2001@outlook.com
+    <a class="contact-email" href="/cdn-cgi/l/email-protection#e2948b868a9b838c838c868a838cd0d2d2d3a28d97968e8d8d89cc818d8f">
+      <span class="__cf_email__" data-cfemail="66100f020e1f07080708020e070854565657260913120a09090d4805090b">[email&#160;protected]</span>
     </a>
     <div class="contact-links">
       <a class="btn btn-outline" href="tel:+16082091879">+1 (608) 209-1879</a>
@@ -767,27 +1033,23 @@
   <span>© 2026 Vidhyanandhan Sathishkumar &nbsp;·&nbsp; Madison, WI &nbsp;·&nbsp; Built with HTML/CSS</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Intersection observer for scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
         setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.timeline-item, .project-card').forEach(el => observer.observe(el));
 
-  // Subtle parallax on hero glow
-  document.addEventListener('mousemove', (e) => {
-    const glow = document.querySelector('.hero-glow');
-    if (!glow) return;
-    const x = (e.clientX / window.innerWidth - 0.5) * 60;
-    const y = (e.clientY / window.innerHeight - 0.5) * 40;
-    glow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-  });
-</script>
+  // Fallback: make everything visible after 1.5s in case observer doesn't fire
+  setTimeout(() => {
+    document.querySelectorAll('.timeline-item, .project-card').forEach(el => el.classList.add('visible'));
+  }, 1500);
 
-</body>
-</html>
+  // Subtle parallax on hero glow
+  document.addEventListener('mousemove', (e) 
