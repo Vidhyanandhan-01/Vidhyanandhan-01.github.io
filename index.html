@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vidhyanandhan Sathishkumar — ASIC & Hardware Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06070d;
+    --bg2: #0c0e1a;
+    --bg3: #111426;
+    --cyan: #00e5ff;
+    --cyan-dim: rgba(0,229,255,0.12);
+    --cyan-glow: rgba(0,229,255,0.4);
+    --orange: #ff6b35;
+    --text: #e8eaf6;
+    --muted: #6b7db3;
+    --border: rgba(0,229,255,0.15);
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(6,7,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--cyan);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 48px 80px;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+    top: 50%; left: 60%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -3px;
+    color: var(--text);
+    max-width: 800px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s forwards;
+  }
+
+  h1 .accent { color: var(--cyan); }
+
+  .hero-sub {
+    margin-top: 32px;
+    max-width: 560px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.65s forwards;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--cyan);
+    color: var(--bg);
+    font-weight: 700;
+  }
+  .btn-primary:hover {
+    background: #fff;
+    box-shadow: 0 0 32px var(--cyan-glow);
+  }
+
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .btn-outline:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 80px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.8s forwards;
+  }
+
+  .stat-num {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--cyan);
+    letter-spacing: -1px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 48px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 200px;
+  }
+
+  h2 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 48px);
+    letter-spacing: -1.5px;
+    margin-bottom: 48px;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg2); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-card {
+    background: var(--bg2);
+    padding: 32px;
+    transition: background 0.2s;
+  }
+  .skill-card:hover { background: var(--bg3); }
+
+  .skill-card-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    margin-bottom: 16px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    background: var(--cyan-dim);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+  .timeline-meta {
+    padding-top: 4px;
+  }
+
+  .timeline-period {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-company {
+    font-size: 12px;
+    color: var(--cyan);
+    margin-top: 4px;
+    font-weight: 700;
+  }
+
+  .timeline-location {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .timeline-role {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  .timeline-desc {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .timeline-desc li {
+    margin-bottom: 6px;
+    padding-left: 16px;
+    position: relative;
+    list-style: none;
+  }
+
+  .timeline-desc li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    font-size: 10px;
+    top: 3px;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--bg2); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--bg2);
+    padding: 36px;
+    transition: background 0.25s;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s, background 0.25s;
+  }
+  .project-card.visible { opacity: 1; transform: translateY(0); }
+  .project-card:hover { background: var(--bg3); }
+
+  .project-index {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+
+  .project-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .tech-chip {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    background: rgba(255,107,53,0.1);
+    border: 1px solid rgba(255,107,53,0.2);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .project-desc {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .project-highlight {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--cyan-dim);
+    border-left: 2px solid var(--cyan);
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  /* ── CONTACT ── */
+  #contact { text-align: center; }
+
+  .contact-email {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(24px, 4vw, 52px);
+    letter-spacing: -2px;
+    color: var(--cyan);
+    text-decoration: none;
+    display: inline-block;
+    margin: 24px 0 40px;
+    transition: color 0.2s;
+    word-break: break-all;
+  }
+  .contact-email:hover { color: #fff; text-shadow: 0 0 40px var(--cyan-glow); }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 20px; }
+    .nav-links li:nth-child(3), .nav-links li:nth-child(4) { display: none; }
+    #hero { padding: 120px 24px 60px; }
+    .section-inner { padding: 72px 24px; }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    .timeline-meta { display: flex; gap: 12px; align-items: baseline; }
+    footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VS</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <p class="hero-tag">// ASIC Design · RTL · CPU/GPU Microarchitecture · SoC</p>
+  <h1>Vidhyanandhan<br><span class="accent">Sathishkumar</span></h1>
+  <p class="hero-sub">
+    MS ECE @ UW–Madison, specializing in Low-Power ASIC Design, RTL, CPU/GPU Microarchitecture,
+    and Hardware Accelerators. I work the full stack — microarchitecture through tapeout —
+    with multiple designs through RTL → Synthesis → P&R → GDS → STA, including a CNN accelerator
+    in tapeout prep on SKY130. Previously at CynLr, leading electronics R&D on heterogeneous
+    compute platforms (Jetson + FPGA), high-speed interfaces (PCIe Gen4, USB 3.2), and
+    real-time motion control for vision and robotics systems.
+  </p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="mailto:vidhyanandhan2001@outlook.com">Get in Touch</a>
+    <a class="btn btn-outline" href="#projects">View Projects</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Years Industry</div>
+    </div>
+    <div>
+      <div class="stat-num">2</div>
+      <div class="stat-label">Tapeout Nodes</div>
+    </div>
+    <div>
+      <div class="stat-num">7nm</div>
+      <div class="stat-label">Finest Process Node</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">Expertise</p>
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">HDL & Languages</div>
+        <div class="skill-tags">
+          <span class="tag">SystemVerilog</span>
+          <span class="tag">VHDL</span>
+          <span class="tag">C++</span>
+          <span class="tag">C</span>
+          <span class="tag">CUDA</span>
+          <span class="tag">Python</span>
+          <span class="tag">TCL</span>
+          <span class="tag">HSpice</span>
+          <span class="tag">SystemC</span>
+          <span class="tag">Assembly</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">EDA Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Synopsys DC</span>
+          <span class="tag">Cadence Innovus</span>
+          <span class="tag">PrimeTime</span>
+          <span class="tag">Cadence Virtuoso</span>
+          <span class="tag">Questasim</span>
+          <span class="tag">Design Vision</span>
+          <span class="tag">OpenLane</span>
+          <span class="tag">Yosys</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Platforms & Compute</div>
+        <div class="skill-tags">
+          <span class="tag">Nvidia Jetson</span>
+          <span class="tag">Xilinx FPGA</span>
+          <span class="tag">Altera</span>
+          <span class="tag">gem5</span>
+          <span class="tag">ChampSim</span>
+          <span class="tag">Ramulator</span>
+          <span class="tag">Vivado</span>
+          <span class="tag">Quartus</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Design Domains</div>
+        <div class="skill-tags">
+          <span class="tag">RTL Design</span>
+          <span class="tag">ASIC P&R</span>
+          <span class="tag">STA</span>
+          <span class="tag">DFT / Scan</span>
+          <span class="tag">Low-Power</span>
+          <span class="tag">PCIe / DDR</span>
+          <span class="tag">UVM/SVA</span>
+          <span class="tag">Schematic & PCB</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Career</p>
+    <h2>Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <div class="timeline-period">Jan 2026 – Present</div>
+          <div class="timeline-company">UW–Madison</div>
+          <div class="timeline-location">Madison, USA</div>
+        </div>
+        <div>
+          <div class="timeline-role">Teaching Assistant — ECE453</div>
+          <ul class="timeline-desc">
+            <li>Guiding capstone teams through board bring-up and hardware validation including power sequencing, clocking, and peripheral initialization on PSoC6-based systems.</li>
+            <li>Reviewing schematics, PCB designs, and firmware as part of course instruction.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <div class="timeline-period">Aug 2022 – Apr 2025</div>
+          <div class="timeline-company">CynLr</div>
+          <div class="timeline-location">Bengaluru, India</div>
+        </div>
+        <div>
+          <div class="timeline-role">Design & Development — Founding Team</div>
+          <ul class="timeline-desc">
+            <li>Led hardware engineering across RTL, FPGA, embedded systems, and PCB design for production-grade smart camera platforms.</li>
+            <li>Architected a Jetson/Xilinx heterogeneous compute platform (CPU/GPU/FPGA) that reduced system latency by <strong style="color:var(--cyan)">40%</strong>.</li>
+            <li>Developed SystemVerilog RTL/IPs for FPGA-based image processing and CNN acceleration with pipelined datapaths and PCIe DMA engines.</li>
+            <li>Built high-speed interface stacks — PCIe, DDR, USB3, EtherCAT/CAN — enabling neuromorphic vision systems.</li>
+            <li>Implemented GPU (CUDA) and FPGA parallel image pipelines achieving significant throughput gains.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <div class="timeline-period">Feb – Jul 2022</div>
+          <div class="timeline-company">CynLr</div>
+          <div class="timeline-location">Bengaluru, India</div>
+        </div>
+        <div>
+          <div class="timeline-role">Design & Development Intern</div>
+          <ul class="timeline-desc">
+            <li>Worked on embedded design for smart camera development, motion control platforms, and industrial communication protocols.</li>
+            <li>Designed schematics, PCBs, and developed embedded firmware as part of CynLr's hardware R&D team.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <div class="timeline-period">Jul – Dec 2021</div>
+          <div class="timeline-company">MedevPlus</div>
+          <div class="timeline-location">Bengaluru, India</div>
+        </div>
+        <div>
+          <div class="timeline-role">Embedded Systems Intern</div>
+          <ul class="timeline-desc">
+            <li>Designed biomedical-grade embedded systems and line-scan cameras for Optical Coherence Tomography (OCT).</li>
+            <li>Developed schematics, PCBs, and RTL modules integrating FPGAs and image sensors for high-resolution acquisition.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label">Work</p>
+    <h2>Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-index">01 / ASIC</div>
+        <div class="project-title">CNN Accelerator — RTL to GDS</div>
+        <div class="project-tech">
+          <span class="tech-chip">7nm + 130nm</span>
+          <span class="tech-chip">ASAP7 PDK</span>
+          <span class="tech-chip">SKY130</span>
+          <span class="tech-chip">Synopsys DC</span>
+          <span class="tech-chip">Cadence Innovus</span>
+        </div>
+        <p class="project-desc">
+          Fully parallel CNN accelerator in SystemVerilog featuring a custom Zig-Zag dataflow Systolic Array with clock-gated Processing Elements supporting multi-precision bit widths and ReLU. Full ASIC flow: RTL → Synthesis → P&R → STA → GDSII.
+        </p>
+        <div class="project-highlight">
+          ▸ 15% reduction in dynamic power via clock gating &amp; datapath width optimization<br>
+          ▸ 20% AMAT reduction using Zig-Zag &amp; circular dataflow patterns<br>
+          ▸ Tapeout in progress on SKY130 with integrated SerDes, DFT (scan)
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-index">02 / CPU</div>
+        <div class="project-title">RISC-V RV32I Pipelined Processor</div>
+        <div class="project-tech">
+          <span class="tech-chip">SystemVerilog</span>
+          <span class="tech-chip">Synopsys</span>
+          <span class="tech-chip">SAED32</span>
+          <span class="tech-chip">UVM</span>
+        </div>
+        <p class="project-desc">
+          Full 5-stage pipeline (IF, ID, EX, MEM, WB) with hazard resolution via forwarding, stall control, and pipeline flush. Added 2-bit dynamic branch predictor, write-back data cache, and virtual memory. Synthesized and laid out with Synopsys IC Compiler.
+        </p>
+        <div class="project-highlight">
+          ▸ Up to 35% CPI improvement over baseline configurations<br>
+          ▸ Verified with CRV self-checking testbenches + UVM SVA assertions
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-index">03 / ARCH</div>
+        <div class="project-title">Hybrid Z-Cache + XOR-Cache LLC</div>
+        <div class="project-tech">
+          <span class="tech-chip">ChampSim</span>
+          <span class="tech-chip">gem5</span>
+          <span class="tech-chip">PARSEC</span>
+        </div>
+        <p class="project-desc">
+          Hybrid cache architecture approximating fully associative performance with 4-way hardware, combining Z-Cache placement and XOR-based compression. Introduced adaptive timestamp skewing to bias LRU and multi-hash candidate expansion for robust eviction.
+        </p>
+        <div class="project-highlight">
+          ▸ Evaluated IPC and MPKI on PARSEC benchmarks across varying associativity parameters
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-index">04 / CUSTOM</div>
+        <div class="project-title">MLP for Human Activity Recognition</div>
+        <div class="project-tech">
+          <span class="tech-chip">7nm Full-Custom</span>
+          <span class="tech-chip">Cadence Virtuoso</span>
+          <span class="tech-chip">HSPICE</span>
+        </div>
+        <p class="project-desc">
+          Optimized neuron datapath using K-map logic minimization and MUX-based architecture (4:1 decomposed to cascaded 2:1 transmission gate MUXes). Full custom ASIC flow: schematic → layout → DRC/LVS → PEX → STA, with multi-Vt cells for power/timing.
+        </p>
+        <div class="project-highlight">
+          ▸ Post-layout HSPICE simulations with extracted parasitics and IR drop analysis<br>
+          ▸ Self-checking testbenches across all input combinations
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <h2>Let's Build<br>Something Real</h2>
+    <a class="contact-email" href="mailto:vidhyanandhan2001@outlook.com">
+      vidhyanandhan2001@outlook.com
+    </a>
+    <div class="contact-links">
+      <a class="btn btn-outline" href="tel:+16082091879">+1 (608) 209-1879</a>
+      <a class="btn btn-outline" href="https://linkedin.com/in/" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Vidhyanandhan Sathishkumar &nbsp;·&nbsp; Madison, WI &nbsp;·&nbsp; Built with HTML/CSS</span>
+</footer>
+
+<script>
+  // Intersection observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.timeline-item, .project-card').forEach(el => observer.observe(el));
+
+  // Subtle parallax on hero glow
+  document.addEventListener('mousemove', (e) => {
+    const glow = document.querySelector('.hero-glow');
+    if (!glow) return;
+    const x = (e.clientX / window.innerWidth - 0.5) * 60;
+    const y = (e.clientY / window.innerHeight - 0.5) * 40;
+    glow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+  });
+</script>
+
+</body>
+</html>
